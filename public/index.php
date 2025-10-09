@@ -27,6 +27,7 @@ if ($action === 'login') {
         $controller->mostrarFormulario();
     }
 
+    // **** ACCESO DASHBOARD.
 }elseif ($action === 'dashboard') {
     
     require_once '../controllers/DashboardController.php';
@@ -34,7 +35,25 @@ if ($action === 'login') {
     $controller->index();
    
    
-// **** CIERRE DE SESIÓN.
+
+// CUALQUIER TAREA  CON CONTRATOS.
+} elseif (str_starts_with($action, 'contratos') || $action === 'editar_contrato' || $action === 'editar_contrato' || $action === 'eliminar_contrato'){
+
+     require_once '../controllers/ContratoController.php';
+    $controller = new ContratoController();
+
+    if ($action === 'contratos') {
+        $controller->listar();
+    } elseif ($action === 'crear_usuario') {
+        $controller->crear();
+    } elseif ($action === 'editar_contrato' && isset($_GET['id'])) {
+        $controller->editar($_GET['id']);
+    } elseif ($action === 'eliminar_usuario' && isset($_GET['id'])) {
+        $controller->eliminar($_GET['id']);
+    }
+
+    // CUALQUIER TAREA  CON CLIENTES.
+    
 }else{
 
         // En el caso que no tenga argumento o no coincida.

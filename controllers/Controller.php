@@ -5,7 +5,7 @@ class Controller
     // Carga un modelo de la carpeta /models/
     public function model($model)
     {
-        require_once '../models/' . $model . '.php';
+        require_once '../models/' . $model . 'Model.php';
         return new $model();
     }
 
