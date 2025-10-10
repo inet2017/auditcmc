@@ -38,7 +38,7 @@
                             <tr>
                                 <td>
                                 <i class="icon-base bx bxl-angular icon-md text-danger me-4"></i> 
-                                    <span><a href=""><?= htmlspecialchars($contrato['nombre']) ?></a></span>
+                                    <span><?= htmlspecialchars($contrato['nombre']) ?></span>
                                 </td>
                                 <td>Albert Cook</td>
                                 <td>
@@ -79,7 +79,7 @@
                                     <a class="dropdown-item" href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=editar_contrato&id=<?= htmlspecialchars($contrato['id']) ?>"
                                         ><i class="icon-base bx bx-edit-alt me-1"></i> Edit</a
                                     >
-                                    <a class="dropdown-item" href="javascript:void(0);"
+                                    <a class="dropdown-item" href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=eliminar_contrato&id=<?= htmlspecialchars($contrato['id']) ?>"
                                         ><i class="icon-base bx bx-trash me-1"></i> Delete</a
                                     >
                                     </div>

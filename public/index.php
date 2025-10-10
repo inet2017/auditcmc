@@ -37,7 +37,7 @@ if ($action === 'login') {
    
 
 // CUALQUIER TAREA  CON CONTRATOS.
-} elseif (str_starts_with($action, 'contratos') || $action === 'editar_contrato' || $action === 'editar_contrato' || $action === 'eliminar_contrato'){
+} elseif (str_starts_with($action, 'contratos') || $action === 'editar_contrato' || $action === 'actualizar_contrato' || $action === 'eliminar_contrato'){
 
      require_once '../controllers/ContratoController.php';
     $controller = new ContratoController();
@@ -48,7 +48,10 @@ if ($action === 'login') {
         $controller->crear();
     } elseif ($action === 'editar_contrato' && isset($_GET['id'])) {
         $controller->editar($_GET['id']);
-    } elseif ($action === 'eliminar_usuario' && isset($_GET['id'])) {
+    }elseif ($action === 'actualizar_contrato' && isset($_POST['id'])) {
+        var_dump($POST['id']);
+        $controller->actualizar($_POST['id']);
+    } elseif ($action === 'eliminar_contrato' && isset($_GET['id'])) {
         $controller->eliminar($_GET['id']);
     }
 

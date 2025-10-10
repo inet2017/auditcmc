@@ -33,19 +33,31 @@ class ContratoController extends Controller {
        header('Location: ../public/index.php?action=clientes');
     }
 
-    // Ver contrato o plantilla.
-    public function ver($id) {
-        $usuarioModel = $this->model('Usuario');
-        $cliente = $usuarioModel->obtenerPorId($id);
-        $this->view('cliente/ver', ['cliente' => $cliente]);
-    }
 
     // Editar  contrato o plantilla.
     public function editar($id) {
         $usuarioModel = $this->model('Contrato');
         $contrato = $usuarioModel->obtenerPorId($id);
-        $this->view('gestiones/contratos/editar', ['contrato' => $contrato]);
+        
+         $this->view('gestiones/contratos/editar',['contrato' => $contrato]);
     }
+
+     public function actualizar() {
+        $model = $this->model('Contrato');
+        $model->actualizar($_POST);
+        header("Location: index.php?action=contratos");
+    }
+    
+     // ELiminar contrato o plantilla.
+     public function eliminar($id) {
+        try{
+            $usuarioModel=$this->model('Contrato');
+            $usuarioModel->eliminar($id);
+            header("Location: index.php?action=contratos");
+        } catch (Exception $e) {
+            echo "<script>alert('{$e->getMessage()}'); window.location.href='../public/index.php?action=contratos';</script>";
+        }
+     }
 
 
 

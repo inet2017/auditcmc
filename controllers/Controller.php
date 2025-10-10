@@ -12,6 +12,11 @@ class Controller
     // Carga una vista de la carpeta /views/
     public function view($view, $data = [])
     {
+         // Crea variables con las claves del array: $contrato, $usuario, etc.
+        if (is_array($data)) {
+            extract($data, EXTR_SKIP);
+        } 
+        
         require_once '../views/' . $view . '.php';
     }
 }
