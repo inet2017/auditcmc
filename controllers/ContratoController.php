@@ -16,7 +16,7 @@ class ContratoController extends Controller {
 
      // Crea un nuevo cliente.
      public function crear() {
-        $model = $this->model('Usuario');
+        $model = $this->model('Contrato');
 
         $nombre     = $_POST['nombre'];
     
@@ -29,8 +29,8 @@ class ContratoController extends Controller {
             return;
         }
 
-        $model->crearClienteCompleto($nombre, $apellidos, $email, $password, $rol, $activado, $telefono, $direccion, $avatar, $firma);
-       header('Location: ../public/index.php?action=clientes');
+        $model->crear($nombre);
+       header('Location: ../public/index.php?action=contratos');
     }
 
 

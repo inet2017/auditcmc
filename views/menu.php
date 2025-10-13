@@ -132,8 +132,7 @@
                 <li class="menu-item">
                   <a
                     href="#"
-                    class="menu-link"
-                    target="_blank">
+                    class="menu-link"">
                     <div class="text-truncate" data-i18n="Landing">Listado de clientes</div>
                   </a>
                 </li>
@@ -141,8 +140,7 @@
                  <li class="menu-item">
                   <a
                     href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=contratos"
-                    class="menu-link"
-                    target="_blank">
+                    class="menu-link">
                     <div class="text-truncate" data-i18n="Landing">Contratos</div>
                   </a>
                 </li>
@@ -199,8 +197,8 @@
                   <input
                     type="text"
                     class="form-control border-0 shadow-none ps-1 ps-sm-2 d-md-block d-none"
-                    placeholder="Search..."
-                    aria-label="Search..." />
+                    placeholder="Buscar..."
+                    aria-label="Buscar..." />
                 </div>
               </div>
               <!-- /Search -->
@@ -215,7 +213,7 @@
                     data-size="large"
                     data-show-count="true"
                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
+                    >Notificaciones</a
                   >
                 </li>
 
@@ -226,7 +224,7 @@
                     href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="<?= $_ENV['BASE_URL'] ?>/public/img/avatar.jpg" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -250,29 +248,21 @@
                     </li>
                     <li>
                       <a class="dropdown-item" href="#">
-                        <i class="icon-base bx bx-user icon-md me-3"></i><span>My Profile</span>
+                        <i class="icon-base bx bx-user icon-md me-3"></i><span>Perfil</span>
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="#">
-                        <i class="icon-base bx bx-cog icon-md me-3"></i><span>Settings</span>
+                        <i class="icon-base bx bx-cog icon-md me-3"></i><span>Configuración</span>
                       </a>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 icon-base bx bx-credit-card icon-md me-3"></i
-                          ><span class="flex-grow-1 align-middle">Billing Plan</span>
-                          <span class="flex-shrink-0 badge rounded-pill bg-danger">4</span>
-                        </span>
-                      </a>
-                    </li>
+                    
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
                       <a class="dropdown-item" href="javascript:void(0);">
-                        <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span>
+                        <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Cerrar sesión</span>
                       </a>
                     </li>
                   </ul>

@@ -23,12 +23,12 @@ class Contrato {
     }
 
     // Crea un nuevo contratos
-    public function crear($datos) {
+    public function crear($nombre) {
         $stmt = $this->db->prepare("
             INSERT INTO `contrato_tipos` (`nombre`) VALUES (?)
         ");
         $stmt->execute([
-            $datos['nombre'],
+            $nombre,
         ]);
     }
 
