@@ -74,7 +74,7 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-            <li class="menu-item active open">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-smile"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
@@ -152,11 +152,10 @@
 
 
             <!-- Configuración -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">OTROS</span></li>
             <li class="menu-item">
               <a
                 href="https://github.com/themeselection/sneat-bootstrap-html-admin-template-free/issues"
-                target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Support">Usuarios</div>
@@ -165,7 +164,6 @@
             <li class="menu-item">
               <a
                 href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
-                target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" data-i18n="Documentation">Documentación</div>

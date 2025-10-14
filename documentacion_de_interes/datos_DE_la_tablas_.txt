@@ -1,0 +1,6 @@
+nombre, razon_social, cif, tipo_empresa, actividad, direccion, codigo_postal, poblacion, provincia, pais, telefono_principal, telefono_secundario, email, sitio_web, logotipo, tipo_contrato, numero_contrato, fecha_alta, estado_cliente, observaciones
+
+
+nombre, apellidos, cargo, departamento, telefono, movil, email, notas, fecha_alta, estado_contacto
+
+comercial_asignado, codigo_interno, fecha_ultima_interaccion, fecha_renovacion, nivel_prioridad, sla, documentacion_adjunta, consentimiento_rgpd, comentarios_internos
