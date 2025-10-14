@@ -131,7 +131,7 @@
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a
-                    href="#"
+                    href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=clientes"
                     class="menu-link"">
                     <div class="text-truncate" data-i18n="Landing">Listado de clientes</div>
                   </a>

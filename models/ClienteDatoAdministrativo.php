@@ -2,7 +2,7 @@
 require_once '../config/database.php';
 
 
-class DatoAdministrativo {
+class ClienteDatoAdministrativo {
 private PDO $db;
 
 
@@ -70,4 +70,3 @@ private PDO $db;
         $stmt->execute([$id]);
     }
 }
-```

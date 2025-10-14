@@ -57,6 +57,27 @@ if ($action === 'login') {
 
     // CUALQUIER TAREA  CON CLIENTES.
     
+// CUALQUIER TAREA  CON CLIENTES.
+} elseif (str_starts_with($action, 'clientes') || $action === 'nuevo_cliente'  || $action === 'crear_cliente'  || $action === 'editar_cliente' || $action === 'actualizar_cliente' || $action === 'eliminar_cliente'){
+
+     require_once '../controllers/ClienteController.php';
+    $controller = new ClienteController();
+
+    if ($action === 'clientes') {
+        $controller->listar();
+    } elseif ($action === 'nuevo_cliente') {
+        $controller->form();
+    } elseif ($action === 'nuevo_contrato' && isset($_GET['id'])) {
+        $controller->editar($_GET['id']);
+    }elseif ($action === 'actualizar_contrato' && isset($_POST['id'])) {
+        var_dump($POST['id']);
+        $controller->actualizar($_POST['id']);
+    } elseif ($action === 'eliminar_contrato' && isset($_GET['id'])) {
+        $controller->eliminar($_GET['id']);
+    }
+
+    // CUALQUIER TAREA  CON CLIENTES.
+    
 }else{
 
         // En el caso que no tenga argumento o no coincida.
