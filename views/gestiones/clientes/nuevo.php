@@ -22,7 +22,7 @@
       <div class="card">
         <h5 class="card-header">Alta Cliente</h5>
         <div class="card-body">
-          <form id="formValidationExamples" class="row g-6 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+          <form id="formValidationExamples" class="row g-6 fv-plugins-bootstrap5 fv-plugins-framework"  action="index.php?action=crear_cliente" method="POST">
             <!-- Datos de la empresa -->
 
             <div class="col-12">

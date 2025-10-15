@@ -67,12 +67,14 @@ if ($action === 'login') {
         $controller->listar();
     } elseif ($action === 'nuevo_cliente') {
         $controller->form();
-    } elseif ($action === 'nuevo_contrato' && isset($_GET['id'])) {
+    } elseif ($action === 'crear_cliente') {
+        $controller->crear();
+    }elseif ($action === 'editar_cliente' && isset($_GET['id'])) {
         $controller->editar($_GET['id']);
-    }elseif ($action === 'actualizar_contrato' && isset($_POST['id'])) {
-        var_dump($POST['id']);
+    }elseif ($action === 'actualizar_cliente' && isset($_POST['id'])) {
+       var_dump($_POST['id']);
         $controller->actualizar($_POST['id']);
-    } elseif ($action === 'eliminar_contrato' && isset($_GET['id'])) {
+    } elseif ($action === 'eliminar_cliente' && isset($_GET['id'])) {
         $controller->eliminar($_GET['id']);
     }
 

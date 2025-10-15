@@ -22,26 +22,26 @@ class ClienteController extends Controller {
         $model = $this->model('Cliente');
 
         $data = [
-            'id' => isset($in['id']) ? (int)$in['id'] : null,
-            'nombre' => trim($in['nombre'] ?? ''),
-            'razon_social' => trim($in['razon_social'] ?? ''),
-            'cif' => strtoupper(trim($in['cif'] ?? '')),
-            'tipo_empresa' => $in['tipo_empresa'] ?? 'S.L.',
-            'actividad' => trim($in['actividad'] ?? ''),
-            'direccion' => trim($in['direccion'] ?? ''),
-            'codigo_postal' => trim($in['codigo_postal'] ?? ''),
-            'poblacion' => trim($in['poblacion'] ?? ''),
-            'provincia' => trim($in['provincia'] ?? ''),
-            'pais' => trim($in['pais'] ?? 'España'),
-            'telefono_principal' => trim($in['telefono_principal'] ?? ''),
-            'telefono_secundario' => trim($in['telefono_secundario'] ?? ''),
-            'email' => trim($in['email'] ?? ''),
-            'sitio_web' => trim($in['sitio_web'] ?? ''),
-            'tipo_contrato_id' => !empty($in['tipo_contrato_id']) ? (int)$in['tipo_contrato_id'] : null,
-            'numero_contrato' => trim($in['numero_contrato'] ?? ''),
-            'fecha_alta' => !empty($in['fecha_alta']) ? $in['fecha_alta'] : date('Y-m-d'),
-            'estado_cliente' => $in['estado_cliente'] ?? 'Activo',
-            'observaciones' => trim($in['observaciones'] ?? ''),
+            'id' => isset($_POST['id']) ? (int)$_POST['id'] : null,
+            'nombre' => trim($_POST['nombre'] ?? ''),
+            'razon_social' => trim($_POST['razon_social'] ?? ''),
+            'cif' => strtoupper(trim($_POST['cif'] ?? '')),
+            'tipo_empresa' => $_POST['tipo_empresa'] ?? 'S.L.',
+            'actividad' => trim($_POST['actividad'] ?? ''),
+            'direccion' => trim($_POST['direccion'] ?? ''),
+            'codigo_postal' => trim($_POST['codigo_postal'] ?? ''),
+            'poblacion' => trim($_POST['poblacion'] ?? ''),
+            'provincia' => trim($_POST['provincia'] ?? ''),
+            'pais' => trim($_POST['pais'] ?? 'España'),
+            'telefono_principal' => trim($_POST['telefono_principal'] ?? ''),
+            'telefono_secundario' => trim($_POST['telefono_secundario'] ?? ''),
+            'email' => trim($_POST['email'] ?? ''),
+            'sitio_web' => trim($_POST['sitio_web'] ?? ''),
+            'tipo_contrato_id' => !empty($_POST['tipo_contrato_id']) ? (int)$_POST['tipo_contrato_id'] : null,
+            'numero_contrato' => trim($_POST['numero_contrato'] ?? ''),
+            'fecha_alta' => !empty($_POST['fecha_alta']) ? $_POST['fecha_alta'] : date('Y-m-d'),
+            'estado_cliente' => $_POST['estado_cliente'] ?? 'Activo',
+            'observaciones' => trim($_POST['observaciones'] ?? ''),
         ];
         $data['logotipo'] = null;
 
@@ -68,7 +68,28 @@ class ClienteController extends Controller {
 
     public function actualizar() {
         $model = $this->model('Cliente');
-        $data = $this->sanitize($_POST);
+        $data = [
+            'id' => isset($_POST['id']) ? (int)$_POST['id'] : null,
+            'nombre' => trim($_POST['nombre'] ?? ''),
+            'razon_social' => trim($_POST['razon_social'] ?? ''),
+            'cif' => strtoupper(trim($_POST['cif'] ?? '')),
+            'tipo_empresa' => $_POST['tipo_empresa'] ?? 'S.L.',
+            'actividad' => trim($_POST['actividad'] ?? ''),
+            'direccion' => trim($_POST['direccion'] ?? ''),
+            'codigo_postal' => trim($_POST['codigo_postal'] ?? ''),
+            'poblacion' => trim($_POST['poblacion'] ?? ''),
+            'provincia' => trim($_POST['provincia'] ?? ''),
+            'pais' => trim($_POST['pais'] ?? 'España'),
+            'telefono_principal' => trim($_POST['telefono_principal'] ?? ''),
+            'telefono_secundario' => trim($_POST['telefono_secundario'] ?? ''),
+            'email' => trim($_POST['email'] ?? ''),
+            'sitio_web' => trim($_POST['sitio_web'] ?? ''),
+            'tipo_contrato_id' => !empty($_POST['tipo_contrato_id']) ? (int)$_POST['tipo_contrato_id'] : null,
+            'numero_contrato' => trim($_POST['numero_contrato'] ?? ''),
+            'fecha_alta' => !empty($_POST['fecha_alta']) ? $_POST['fecha_alta'] : date('Y-m-d'),
+            'estado_cliente' => $_POST['estado_cliente'] ?? 'Activo',
+            'observaciones' => trim($_POST['observaciones'] ?? ''),
+        ];
 
         // Subida de logotipo si se reemplaza
         if (!empty($_FILES['logotipo']['name'])) {

@@ -59,11 +59,11 @@
                                     <i class="icon-base bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=editar_contrato&id=<?= htmlspecialchars($cliente['id']) ?>"
+                                    <a class="dropdown-item" href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=editar_cliente&id=<?= htmlspecialchars($cliente['id']) ?>"
                                         ><i class="icon-base bx bx-edit-alt me-1"></i> Editar</a
                                     >
                                     <a class="dropdown-item"
-                                      href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=eliminar_contrato&id=<?= htmlspecialchars($cliente['id']) ?>"
+                                      href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=eliminar_cliente&id=<?= htmlspecialchars($cliente['id']) ?>"
                                       onclick="return confirm('¿Estás seguro de eliminar este contrato?');">
                                       <i class="icon-base bx bx-trash me-1"></i> Eliminar
                                     </a>
