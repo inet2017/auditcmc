@@ -16,7 +16,13 @@ class ClienteController extends Controller {
     }
 
     public function form() {
-         $this->view('gestiones/clientes/nuevo');
+
+        $model=$this->model('Cliente');
+         $contratoTipos = $model->contratoTipos();
+
+         $this->view('gestiones/clientes/nuevo', [
+            'contratoTipos' => $contratoTipos
+        ]);
     }
     public function crear() {
         $model = $this->model('Cliente');
@@ -56,13 +62,18 @@ class ClienteController extends Controller {
 
     public function editar($id) {
         $model = $this->model('Cliente');
+        $contactoModel = $this->model('ClienteDatosContacto');
+
         $cliente = $model->obtenerPorId((int)$id);
+
         if (!$cliente) { http_response_code(404); exit('Cliente no encontrado'); }
         $contratoTipos = $model->contratoTipos();
+        $contactos = $contactoModel->listar((int)$id, null);
 
         $this->view('gestiones/clientes/editar', [
             'cliente' => $cliente,
-            'contratoTipos' => $contratoTipos
+            'contratoTipos' => $contratoTipos, 
+            'contactos' => $contactos
         ]);
     }
 

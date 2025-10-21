@@ -80,7 +80,33 @@ if ($action === 'login') {
 
     // CUALQUIER TAREA  CON CLIENTES.
     
-}else{
+
+// CUALQUIER TAREA  CON CONTACTO CLIENTE.
+} elseif (str_starts_with($action, 'crear_cliente_contacto') || $action === 'nuevo_cliente'  || $action === 'crear_cliente'  || $action === 'editar_cliente' || $action === 'actualizar_cliente' || $action === 'eliminar_cliente'){
+
+     require_once '../controllers/ClienteController.php';
+    $controller = new ClienteController();
+
+    if ($action === 'crear_cliente_contacto') {
+        $controller->crear();
+    } elseif ($action === 'nuevo_cliente') {
+        $controller->form();
+    } elseif ($action === 'crear_cliente') {
+        $controller->crear();
+    }elseif ($action === 'editar_cliente' && isset($_GET['id'])) {
+        $controller->editar($_GET['id']);
+    }elseif ($action === 'actualizar_cliente' && isset($_POST['id'])) {
+       var_dump($_POST['id']);
+        $controller->actualizar($_POST['id']);
+    } elseif ($action === 'eliminar_cliente' && isset($_GET['id'])) {
+        $controller->eliminar($_GET['id']);
+    }
+
+    // CUALQUIER TAREA  CON CLIENTES.
+    
+}
+
+else{
 
         // En el caso que no tenga argumento o no coincida.
         if (!isset($_SESSION['usuario'])) {

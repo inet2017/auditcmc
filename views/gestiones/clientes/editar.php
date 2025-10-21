@@ -224,7 +224,17 @@
                                       <div class="col-md-6 form-control-validation fv-plugins-icon-container">
                                         <div class="form-password-toggle">
                                           <label class="form-label" for="formValidationPass">Tipo de contrato</label>
-                                            <input class="form-control" type="text" id="tipo_contrato_id" name="tipo_contrato_id" placeholder="" value="<?= htmlspecialchars($cliente['sitio_tipo_contrato_idweb']) ?>">
+                                            
+                                           <select name="tipo_contrato_id" class="form-select">
+                                          <option value="">— Seleccione tipo de contrato —</option>
+                                             <?php foreach ($data['contratoTipos'] as $tipo): ?>
+                                              <option value="<?= (int)$tipo['id'] ?>" 
+                                                <?= ((int)$cliente['tipo_contrato_id'] === (int)$tipo['id']) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($tipo['nombre']) ?>
+                                              </option>
+                                            <?php endforeach; ?>
+                                        </select>
+
                                           <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
                                         </div>
                                       </div>
@@ -284,7 +294,146 @@
                         
                           <!--  TAB DE CONTACTOS ASOCIADOS. -->
                           <p>
-                              Tabla de contacto Asociados.
+                              
+                                        <?php $contactos = $data['contactos'] ?? []; ?>
+
+                                                <hr class="my-4" />
+                                                <h5 class="mb-3">Contactos del cliente</h5>
+
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                  <div></div>
+                                                  <button class="btn btn-primary"
+                                                          type="button"
+                                                          data-bs-toggle="offcanvas"
+                                                          data-bs-target="#offcanvas-nuevo-contacto"
+                                                          aria-controls="offcanvas-nuevo-contacto">
+                                                    Nuevo contacto
+                                                  </button>
+                                                </div>
+
+                                                <div class="table-responsive text-nowrap">
+                                                  <table class="table">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>Nombre</th>
+                                                        <th>Cargo</th>
+                                                        <th>Departamento</th>
+                                                        <th>Teléfonos</th>
+                                                        <th>Email</th>
+                                                        <th>Estado</th>
+                                                        <th>Alta</th>
+                                                        <th>Acciones</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody class="table-border-bottom-0">
+                                                      <?php foreach ($contactos as $r): ?>
+                                                        <tr>
+                                                          <td><?= htmlspecialchars(trim(($r['nombre']??'').' '.($r['apellidos']??''))) ?></td>
+                                                          <td><?= htmlspecialchars($r['cargo'] ?? '—') ?></td>
+                                                          <td><?= htmlspecialchars($r['departamento'] ?? '—') ?></td>
+                                                          <td>
+                                                            <?php if (!empty($r['telefono'])): ?><div><i class="icon-base bx bx-phone"></i> <?= htmlspecialchars($r['telefono']) ?></div><?php endif; ?>
+                                                            <?php if (!empty($r['movil'])): ?><div><i class="icon-base bx bx-mobile"></i> <?= htmlspecialchars($r['movil']) ?></div><?php endif; ?>
+                                                          </td>
+                                                          <td><?= htmlspecialchars($r['email'] ?? '—') ?></td>
+                                                          <td><span class="badge bg-label-primary"><?= htmlspecialchars($r['estado_contacto'] ?? 'Activo') ?></span></td>
+                                                          <td><?= htmlspecialchars($r['fecha_alta'] ?? '') ?></td>
+                                                          <td>
+                                                            <div class="dropdown">
+                                                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                <i class="icon-base bx bx-dots-vertical-rounded"></i>
+                                                              </button>
+                                                              <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=editar_cliente_contacto&id=<?= (int)$r['id'] ?>">
+                                                                  <i class="icon-base bx bx-edit-alt me-1"></i> Editar
+                                                                </a>
+                                                                <a class="dropdown-item"
+                                                                  href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=eliminar_cliente_contacto&id=<?= (int)$r['id'] ?>"
+                                                                  onclick="return confirm('¿Eliminar contacto?');">
+                                                                  <i class="icon-base bx bx-trash me-1"></i> Eliminar
+                                                                </a>
+                                                              </div>
+                                                            </div>
+                                                          </td>
+                                                        </tr>
+                                                      <?php endforeach; ?>
+                                                      <?php if (empty($contactos)): ?>
+                                                        <tr><td colspan="8" class="text-muted">Sin contactos todavía.</td></tr>
+                                                      <?php endif; ?>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+
+                                                <!-- Offcanvas: nuevo contacto -->
+                                                <div class="offcanvas offcanvas-end" id="offcanvas-nuevo-contacto">
+                                                  <div class="offcanvas-header border-bottom">
+                                                    <h5 class="offcanvas-title">Nuevo contacto</h5>
+                                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                  </div>
+                                                  <div class="offcanvas-body flex-grow-1">
+                                                    <form class="row g-2" method="POST" action="index.php?action=crear_cliente_contacto">
+                                                      <input type="hidden" name="cliente_id" value="<?= (int)$cliente['id'] ?>" />
+
+                                                      <div class="col-md-6">
+                                                        <label class="form-label">Nombre</label>
+                                                        <input type="text" name="nombre" class="form-control" required />
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                        <label class="form-label">Apellidos</label>
+                                                        <input type="text" name="apellidos" class="form-control" />
+                                                      </div>
+
+                                                      <div class="col-md-6">
+                                                        <label class="form-label">Cargo</label>
+                                                        <input type="text" name="cargo" class="form-control" />
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                        <label class="form-label">Departamento</label>
+                                                        <input type="text" name="departamento" class="form-control" />
+                                                      </div>
+
+                                                      <div class="col-md-3">
+                                                        <label class="form-label">Teléfono</label>
+                                                        <input type="text" name="telefono" class="form-control" />
+                                                      </div>
+                                                      <div class="col-md-3">
+                                                        <label class="form-label">Móvil</label>
+                                                        <input type="text" name="movil" class="form-control" />
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                        <label class="form-label">Email</label>
+                                                        <input type="email" name="email" class="form-control" />
+                                                      </div>
+
+                                                      <div class="col-12">
+                                                        <label class="form-label">Notas</label>
+                                                        <textarea name="notas" class="form-control" rows="2"></textarea>
+                                                      </div>
+
+                                                      <div class="col-md-6">
+                                                        <label class="form-label">Fecha alta</label>
+                                                        <input type="date" name="fecha_alta" class="form-control" value="<?= date('Y-m-d') ?>" />
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                        <label class="form-label">Estado</label>
+                                                        <select name="estado_contacto" class="form-select">
+                                                          <?php foreach (['Activo','Inactivo','Principal'] as $e): ?>
+                                                            <option value="<?= $e ?>"><?= $e ?></option>
+                                                          <?php endforeach; ?>
+                                                        </select>
+                                                      </div>
+
+                                                      <div class="col-12">
+                                                        <button type="submit" class="btn btn-primary me-sm-2 me-1">Guardar</button>
+                                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Cancelar</button>
+                                                      </div>
+                                                    </form>
+                                                  </div>
+                                                </div>
+
+                          
+                          
+                          
                             </p>
                             
                       </div>

@@ -166,7 +166,14 @@
             <div class="col-md-6 form-control-validation fv-plugins-icon-container">
               <div class="form-password-toggle">
                 <label class="form-label" for="formValidationPass">Tipo de contrato</label>
-                  <input class="form-control" type="text" id="tipo_contrato_id" name="tipo_contrato_id" placeholder="">
+                 <select name="tipo_contrato_id" class="form-select">
+                  <option value="">— Seleccione tipo de contrato —</option>
+                      <?php foreach ($data['contratoTipos'] as $tipo): ?>
+                        <option value="<?= (int)$tipo['id'] ?>">
+                          <?= htmlspecialchars($tipo['nombre']) ?>
+                        </option>
+                      <?php endforeach; ?>
+                </select>
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
               </div>
             </div>
