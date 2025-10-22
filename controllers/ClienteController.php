@@ -51,6 +51,8 @@ class ClienteController extends Controller {
         ];
         $data['logotipo'] = null;
 
+      
+
         // Upload opcional de logotipo
         if (!empty($_FILES['logotipo']['name'])) {
             $data['logotipo'] = $this->handleUpload($_FILES['logotipo']);
@@ -63,17 +65,21 @@ class ClienteController extends Controller {
     public function editar($id) {
         $model = $this->model('Cliente');
         $contactoModel = $this->model('ClienteDatosContacto');
+        $admModel = $this->model('DatoAdministrativo');
+   
 
         $cliente = $model->obtenerPorId((int)$id);
 
         if (!$cliente) { http_response_code(404); exit('Cliente no encontrado'); }
         $contratoTipos = $model->contratoTipos();
         $contactos = $contactoModel->listar((int)$id, null);
+        $datosAdministrativos = $admModel->listar((int)$id);
 
         $this->view('gestiones/clientes/editar', [
             'cliente' => $cliente,
             'contratoTipos' => $contratoTipos, 
-            'contactos' => $contactos
+            'contactos' => $contactos, 
+            'datosAdmin'    => $datosAdministrativos
         ]);
     }
 

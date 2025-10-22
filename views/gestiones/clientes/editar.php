@@ -293,11 +293,11 @@
                       <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
                         
                           <!--  TAB DE CONTACTOS ASOCIADOS. -->
-                          <p>
+                          
                               
                                         <?php $contactos = $data['contactos'] ?? []; ?>
 
-                                                <hr class="my-4" />
+                                                <hr class="my-0" />
                                                 <h5 class="mb-3">Contactos del cliente</h5>
 
                                                 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -434,13 +434,148 @@
                           
                           
                           
-                            </p>
+                           
                             
                       </div>
                       <div class="tab-pane fade" id="navs-justified-messages" role="tabpanel">
                         <!--  TAB DE DATOS ADMINISTRATIVOS. -->
-                          <p>
-                              Tabla de datos administrativos.
+                          
+                              
+
+
+                              <?php $datosAdmin = $data['datosAdmin'] ?? []; ?>
+
+                                  <hr class="my-o" />
+                                  <h5 class="mb-3">Datos administrativos</h5>
+
+                                  <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div></div>
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            data-bs-toggle="offcanvas"
+                                            data-bs-target="#offcanvas-nuevo-admin"
+                                            aria-controls="offcanvas-nuevo-admin">
+                                      Nuevo registro
+                                    </button>
+                                  </div>
+
+                                  <div class="table-responsive text-nowrap">
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th>Código interno</th>
+                                          <th>Comercial</th>
+                                          <th>Prioridad</th>
+                                          <th>Últ. interacción</th>
+                                          <th>Renovación</th>
+                                          <th>SLA</th>
+                                          <th>RGPD</th>
+                                          <th>Acciones</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody class="table-border-bottom-0">
+                                        <?php foreach ($datosAdmin as $r): ?>
+                                          <tr>
+                                            <td><?= htmlspecialchars($r['codigo_interno'] ?? '—') ?></td>
+                                            <td><?= htmlspecialchars($r['comercial_asignado'] ?? '—') ?></td>
+                                            <td><span class="badge bg-label-primary"><?= htmlspecialchars($r['nivel_prioridad'] ?? '—') ?></span></td>
+                                            <td><?= htmlspecialchars($r['fecha_ultima_interaccion'] ?? '—') ?></td>
+                                            <td><?= htmlspecialchars($r['fecha_renovacion'] ?? '—') ?></td>
+                                            <td><?= htmlspecialchars($r['sla'] ?? '—') ?></td>
+                                            <td><?= !empty($r['consentimiento_rgpd']) ? 'Sí' : 'No' ?></td>
+                                            <td>
+                                              <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                  <i class="icon-base bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item"
+                                                    href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=editar_dato_admin&id=<?= (int)$r['id'] ?>">
+                                                    <i class="icon-base bx bx-edit-alt me-1"></i> Editar
+                                                  </a>
+                                                  <a class="dropdown-item"
+                                                    href="<?= $_ENV['BASE_URL'] ?>/public/index.php?action=eliminar_dato_admin&id=<?= (int)$r['id'] ?>"
+                                                    onclick="return confirm('¿Eliminar registro administrativo?');">
+                                                    <i class="icon-base bx bx-trash me-1"></i> Eliminar
+                                                  </a>
+                                                </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                        <?php endforeach; ?>
+                                        <?php if (empty($datosAdmin)): ?>
+                                          <tr><td colspan="8" class="text-muted">Sin registros administrativos.</td></tr>
+                                        <?php endif; ?>
+                                      </tbody>
+                                    </table>
+                                  </div>
+
+                                  <!-- Offcanvas: nuevo dato administrativo -->
+                                  <div class="offcanvas offcanvas-end" id="offcanvas-nuevo-admin">
+                                    <div class="offcanvas-header border-bottom">
+                                      <h5 class="offcanvas-title">Nuevo dato administrativo</h5>
+                                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body flex-grow-1">
+                                      <form class="row g-2" method="POST" action="index.php?action=crear_cliente_dato_admin" enctype="multipart/form-data">
+                                        <input type="text" name="cliente_id" value="<?= (int)$cliente['id'] ?>" />
+
+                                        <div class="col-sm-6">
+                                          <label class="form-label">Comercial asignado</label>
+                                          <input type="text" name="comercial_asignado" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <label class="form-label">Código interno</label>
+                                          <input type="text" name="codigo_interno" class="form-control" />
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                          <label class="form-label">Fecha última interacción</label>
+                                          <input type="date" name="fecha_ultima_interaccion" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <label class="form-label">Fecha renovación</label>
+                                          <input type="date" name="fecha_renovacion" class="form-control" />
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                          <label class="form-label">Nivel de prioridad</label>
+                                          <select name="nivel_prioridad" class="form-select">
+                                            <option>Baja</option><option selected>Media</option><option>Alta</option><option>Crítica</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <label class="form-label">SLA</label>
+                                          <input type="text" name="sla" class="form-control" placeholder="8x5, 24x7, etc." />
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                          <label class="form-label">Documentación adjunta</label>
+                                          <input type="file" name="documentacion_adjunta" class="form-control" />
+                                        </div>
+
+                                        <div class="col-sm-12 form-check mt-2">
+                                          <input class="form-check-input" type="checkbox" name="consentimiento_rgpd" id="rgpdCheck" value="1">
+                                          <label class="form-check-label" for="rgpdCheck">Consentimiento RGPD</label>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                          <label class="form-label">Comentarios internos</label>
+                                          <textarea name="comentarios_internos" class="form-control" rows="3"></textarea>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                          <button type="submit" class="btn btn-primary me-sm-2 me-1">Guardar</button>
+                                          <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Cancelar</button>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+
+                          
+                          
+                          
+                          
                             </p>
                             
                        

@@ -82,15 +82,39 @@ if ($action === 'login') {
     
 
 // CUALQUIER TAREA  CON CONTACTO CLIENTE.
-} elseif (str_starts_with($action, 'crear_cliente_contacto') || $action === 'nuevo_cliente'  || $action === 'crear_cliente'  || $action === 'editar_cliente' || $action === 'actualizar_cliente' || $action === 'eliminar_cliente'){
+} elseif (str_starts_with($action, 'crear_cliente_contacto') || $action === 'nuevo_cliente1'  || $action === 'crear_cliente1'  || $action === 'editar_cliente1' || $action === 'actualizar_cliente1' || $action === 'eliminar_cliente1'){
 
-     require_once '../controllers/ClienteController.php';
-    $controller = new ClienteController();
+     require_once '../controllers/ClienteDatosContactoController.php';
+    $controller = new ClienteDatosContactoController();
 
     if ($action === 'crear_cliente_contacto') {
         $controller->crear();
     } elseif ($action === 'nuevo_cliente') {
-        $controller->form();
+        $controller->form(); 
+    } elseif ($action === 'crear_cliente') {
+        $controller->crear();
+    }elseif ($action === 'editar_cliente' && isset($_GET['id'])) {
+        $controller->editar($_GET['id']);
+    }elseif ($action === 'actualizar_cliente' && isset($_POST['id'])) {
+       var_dump($_POST['id']);
+        $controller->actualizar($_POST['id']);
+    } elseif ($action === 'eliminar_cliente' && isset($_GET['id'])) {
+        $controller->eliminar($_GET['id']);
+    }
+
+   
+    
+    
+// CUALQUIER TAREA  CON ADMINISTRATIVO  CLIENTE.
+} elseif (str_starts_with($action, 'crear_cliente_dato_admin') || $action === 'nuevo_cliente1'  || $action === 'crear_cliente1'  || $action === 'editar_cliente1' || $action === 'actualizar_cliente1' || $action === 'eliminar_cliente1'){
+
+     require_once '../controllers/ClienteDatoAdministrativoController.php';
+    $controller = new ClienteDatoAdministrativoController();
+
+    if ($action === 'crear_cliente_dato_admin') {
+        $controller->crear();
+    } elseif ($action === 'nuevo_cliente') {
+        $controller->form(); 
     } elseif ($action === 'crear_cliente') {
         $controller->crear();
     }elseif ($action === 'editar_cliente' && isset($_GET['id'])) {
@@ -104,9 +128,7 @@ if ($action === 'login') {
 
     // CUALQUIER TAREA  CON CLIENTES.
     
-}
-
-else{
+}else{
 
         // En el caso que no tenga argumento o no coincida.
         if (!isset($_SESSION['usuario'])) {
